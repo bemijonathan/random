@@ -1,66 +1,64 @@
 <template>
-	<div class="bg-white flex items-center p-4 justify-between mt-3">
+	<div class="bg-white flex items-center py-4 px-8 justify-between mt-3">
 		<!-- {{ item }} -->
 		<div class="">
-			<img
-				src="https://img.icons8.com/fluent/96/000000/address-book-2.png"
-				class=""
-			/>
+			<i class="ri-book-2-line text-xl" style="color:#9A9A9A"></i>
 		</div>
-		<div>
-			<h3 class="text-xl" style="max-width:248px;">
+		<div class="w-1/4">
+			<h3 class="text-sm leading-6 mb-2 font-medium" style=" color:#3E3E3E">
 				{{ item.title }}
 			</h3>
-			<span class="custom px-3 py-1.5 rounded-full">
+
+			<span
+				class="custom cursor-pointer text-xs px-3 py-1  rounded-full"
+				style="color:#707070"
+			>
 				Custom Task
 			</span>
 		</div>
 		<div>
-			<p>
+			<p class="text-sm" style="color:#3E3E3E">
 				<b> N {{ item.price }} </b>
 			</p>
-			<p class="text-xs">Task price</p>
-			<p class="text-xs"><b> Delivery: </b> within 3 days</p>
+			<p class="text-xs" style="color:#707070">Task price</p>
+			<p class="text-xs mt-2" style="color:#707070">
+				<b> Delivery: </b> within 3 days
+			</p>
 		</div>
-		<div class="flex">
+		<div class="flex space-x-4 items-center">
 			<div>
 				<img
+					alt="DrugStoc image"
 					class="h-10 w-10 rounded-full"
 					src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
 				/>
 			</div>
 			<div>
-				<p class="text-sm"><b> Adamu Musa </b></p>
-				<p class="text-sm">Assigned to</p>
+				<p class="text-sm" style="color:#3E3E3E"><b> Adamu Musa </b></p>
+				<p class="text-xs" style="color:#929292">Assigned to</p>
 			</div>
 		</div>
 		<div>
-			<button class="verify flex items-center justify-center">
-				<div class="h-3 w-3 bg-yellow-400 rounded-full"></div>
-				Verify
+			<button
+				aria-label="button"
+				class="verify flex  items-center py-2 px-4 space-x-3"
+				style="width:160px"
+			>
+				<div class="h-2 w-2 bg-yellow-400 rounded-full"></div>
+				<span class="font-bold text-xs" style="color:#3E3E3E">Verify</span>
 			</button>
 		</div>
 		<div>
-			<img src="https://img.icons8.com/windows/32/000000/chat-message.png" />
+			<i class="ri-message-2-fill" style="color:#3E3E3E"></i>
 		</div>
 		<div class="">
 			<div class="relative">
 				<button
+					aria-label="button"
 					@click="dropdownOpen = !dropdownOpen"
 					class="relative z-10 block rounded-md bg-white p-2 focus:outline-none"
 				>
-					<svg
-						class="h-5 w-5 text-gray-800"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-							clip-rule="evenodd"
-						/>
-					</svg>
+					<i class="ri-more-fill" style="color:#3E3E3E"></i>
 				</button>
 				<div
 					v-if="dropdownOpen"
@@ -91,29 +89,33 @@
 </template>
 
 <script>
-export default {
-	props: ["item"],
-	data() {
-		return {
-			dropdownOpen: false,
-		};
-	},
-};
+	export default {
+		props: ["item"],
+		data() {
+			return {
+				dropdownOpen: false,
+			};
+		},
+	};
 </script>
 
 <style>
-.custom {
-	color: #707070;
-	background: #e2e2e2;
-}
+	.custom {
+		color: #707070;
+		background: #e2e2e2;
+	}
 
-.marketing {
-	color: #e24b4b;
-	background: #ffcccc;
-}
+	.marketing {
+		color: #e24b4b;
+		background: #ffcccc;
+	}
 
-.integrations {
-	color: #00a7ff;
-	background: #c4ebff;
-}
+	.integrations {
+		color: #00a7ff;
+		background: #c4ebff;
+	}
+	.verify {
+		border: 1px solid #929292;
+		border-radius: 0px 24px 24px 24px;
+	}
 </style>

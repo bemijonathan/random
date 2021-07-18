@@ -1,17 +1,22 @@
 <template>
-	<div class="lds-default">
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
+	<div
+		class="h-screen flex justify-center items-center "
+		style="background: #f0f0f1"
+	>
+		<div class="lds-default">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
 	</div>
 </template>
 
@@ -30,7 +35,7 @@
 		position: absolute;
 		width: 6px;
 		height: 6px;
-		background: #fff;
+		background: blue;
 		border-radius: 50%;
 		animation: lds-default 1.2s linear infinite;
 	}

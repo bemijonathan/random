@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white pt-8 px-6" sidebar>
+	<div class="bg-white py-8 px-6" sidebar>
 		<h3 class="text-xl mb-6">Tags</h3>
 
 		<div>
@@ -30,79 +30,87 @@
 </template>
 
 <script>
-import { reactive } from "@vue/reactivity";
-import drugStkCheckboxVue from "./drug-stk-checkbox.vue";
-import { computed } from "@vue/runtime-core";
-import { useStore } from "vuex";
-export default {
-	components: {
-		drugStkCheckboxVue,
-	},
-	setup() {
-		const data = reactive({
-			selectedTags: [],
-			selectedPrice: [],
-			tags: [],
-			priceRange: [
-				{
-					lowerRange: 0,
-					higherRange: 100,
-				},
-				{
-					lowerRange: 100,
-					higherRange: 300,
-				},
-				{
-					lowerRange: 301,
-					higherRange: 900,
-				},
-				{
-					lowerRange: 900,
-					higherRange: Infinity,
-				},
-			],
-		});
+	import { reactive } from "@vue/reactivity";
+	import drugStkCheckboxVue from "./drug-stk-checkbox.vue";
+	import { computed } from "@vue/runtime-core";
+	import { useStore } from "vuex";
+	export default {
+		components: {
+			drugStkCheckboxVue,
+		},
+		setup() {
+			const data = reactive({
+				selectedTags: [],
+				selectedPrice: [],
+				tags: [],
+				priceRange: [
+					{
+						lowerRange: 0,
+						higherRange: 100,
+					},
+					{
+						lowerRange: 100,
+						higherRange: 300,
+					},
+					{
+						lowerRange: 301,
+						higherRange: 900,
+					},
+					{
+						lowerRange: 900,
+						higherRange: Infinity,
+					},
+				],
+			});
 
-		const store = useStore();
+			const store = useStore();
 
-		// onMounted(async () => {
-		// 	await store.dispatch("getTags");
-		// });
+			// onMounted(async () => {
+			// 	await store.dispatch("getTags");
+			// });
 
-		const tags  = computed(() => store.state.Tags)
+			const tags = computed(() => store.state.Tags);
 
-		const setTags = (value) => {
-			console.log(value);
-			if (data.selectedTags.includes(value)) {
-				data.selectedTags.filter((e) => e !== value);
-			} else {
-				data.selectedTags.push(value);
-			}
-		};
+			const setTags = (value) => {
+				console.log(value);
+				if (data.selectedTags.includes(value)) {
+					data.selectedTags.filter((e) => e !== value);
+				} else {
+					data.selectedTags.push(value);
+				}
+			};
 
-		const setPriceRange = (value) => {
-			console.log(value);
-			if (data.selectedPrice.includes(value)) {
-				data.selectedPrice = data.selectedPrice.filter((e) => e !== value);
-			} else {
-				data.selectedPrice.push(value);
-			}
-		};
+			const setPriceRange = (value) => {
+				console.log(value);
+				if (data.selectedPrice.includes(value)) {
+					data.selectedPrice = data.selectedPrice.filter((e) => e !== value);
+				} else {
+					data.selectedPrice.push(value);
+				}
+			};
 
-		return {
-			...data,
-			setTags,
-			setPriceRange,
-			tags,
-		};
-	},
-};
+			return {
+				...data,
+				setTags,
+				setPriceRange,
+				tags,
+			};
+		},
+	};
 </script>
 
 <style>
-[sidebar] {
-	height: calc(100vh - 190px);
-	/* min-width: 30%; */
-	/* overflow: scroll; */
-}
+	[sidebar] {
+		max-height: 100vh;
+		overflow-y: scroll;
+	}
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+	::-webkit-scrollbar-track {
+		background: #f0f0f1;
+	}
+	::-webkit-scrollbar-thumb {
+		background: #f0f0f1;
+	}
 </style>

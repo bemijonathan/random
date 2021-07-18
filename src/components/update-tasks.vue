@@ -1,8 +1,7 @@
 <template>
 	<div>
 		<drug-stk-modal-vue :title="'Hello'" v-if="open">
-
-      {{t}}
+			{{ t }}
 			<template v-slot:header>
 				<div>
 					<h3 class="text-center pt-3">
@@ -13,12 +12,14 @@
 
 			<template v-slot:footer>
 				<button
+					aria-label="button"
 					class="bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 					@click="open = false"
 				>
 					Close
 				</button>
 				<button
+					aria-label="button"
 					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline float-right"
 					@click="save"
 				>
@@ -158,87 +159,87 @@
 </template>
 
 <script>
-import drugStkCheckboxVue from "./drug-stk-checkbox.vue";
-import drugStkModalVue from "./drug-stk-modal.vue";
-import request from "../utils/request";
-import { ref } from '@vue/reactivity';
+	import drugStkCheckboxVue from "./drug-stk-checkbox.vue";
+	import drugStkModalVue from "./drug-stk-modal.vue";
+	import request from "../utils/request";
+	import { ref } from "@vue/reactivity";
 
-export default {
-  props:["task"],
-  setup(props){
-    const t = ref(props)
+	export default {
+		props: ["task"],
+		setup(props) {
+			const t = ref(props);
 
-    return {
-      t
-    }
-  },
-	components: {
-		drugStkModalVue,
-		drugStkCheckboxVue,
-	},
-	data() {
-		return {
-			open: false,
-			priority: false,
-			status: [
-				{
-					label: "Waiting Approval",
-					value: "waiting_approval",
-				},
-				{
-					label: "In Progress",
-					value: "in_progress",
-				},
-				{
-					label: "In Review",
-					value: "in_review",
-				},
-				{
-					label: "Verify",
-					value: "verify",
-				},
-				{
-					label: "Archived",
-					value: "archived",
-				},
-				{
-					label: "Closed",
-					value: "closed",
-				},
-			],
-			title: "",
-			price: "",
-			tag: "",
-			assignee: "",
-			status_id: "",
-		};
-	},
-	methods: {
-		setPriority(value) {
-			this.priority = value;
+			return {
+				t,
+			};
 		},
-		async save() {
-			try {
-				const data = {
-					title: this.title,
-					price: this.price,
-					tag: this.tag,
-					assignee: this.assignee,
-					current_task: true,
-					status: this.status_id,
-				};
-				await request.post("/api/tasks", data);
-				await this.$store.dispatch("getTasks");
-				await this.$store.dispatch("getAnalytics"), (this.open = false);
-			} catch (error) {
-				console.log(error);
-			}
+		components: {
+			drugStkModalVue,
+			drugStkCheckboxVue,
 		},
-	},
-	computed: {
-		tags() {
-			return this.$store.state.Tags;
+		data() {
+			return {
+				open: false,
+				priority: false,
+				status: [
+					{
+						label: "Waiting Approval",
+						value: "waiting_approval",
+					},
+					{
+						label: "In Progress",
+						value: "in_progress",
+					},
+					{
+						label: "In Review",
+						value: "in_review",
+					},
+					{
+						label: "Verify",
+						value: "verify",
+					},
+					{
+						label: "Archived",
+						value: "archived",
+					},
+					{
+						label: "Closed",
+						value: "closed",
+					},
+				],
+				title: "",
+				price: "",
+				tag: "",
+				assignee: "",
+				status_id: "",
+			};
 		},
-	},
-};
+		methods: {
+			setPriority(value) {
+				this.priority = value;
+			},
+			async save() {
+				try {
+					const data = {
+						title: this.title,
+						price: this.price,
+						tag: this.tag,
+						assignee: this.assignee,
+						current_task: true,
+						status: this.status_id,
+					};
+					await request.post("/api/tasks", data);
+					await this.$store.dispatch("getTasks");
+					await this.$store.dispatch("getAnalytics"), (this.open = false);
+				} catch (error) {
+					console.log(error);
+				}
+			},
+		},
+		computed: {
+			tags() {
+				return this.$store.state.Tags;
+			},
+		},
+	};
 </script>
