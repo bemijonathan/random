@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-teal-500">
+	<div class="bg-red-500 fixed top-0 w-screen h-screen">
 		<div class="spinner-box">
 			<div class="blue-orbit leo"></div>
 

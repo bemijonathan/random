@@ -56,7 +56,7 @@ export default {
 				);
 			} else if (
 				type === "prev" &&
-				store.state.Tasks.meta.page_count > +route.query.page < 1
+				+route.query.page > 1
 			) {
 				router.push(
 					"/?active=" +

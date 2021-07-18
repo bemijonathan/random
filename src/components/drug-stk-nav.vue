@@ -8,7 +8,7 @@
 			</div>
 		</template>
 
-		<!-- <template v-slot:footer>
+		<template v-slot:footer>
 			<button
 				class="bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 				@click="open = false"
@@ -17,21 +17,23 @@
 			</button>
 			<button
 				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline float-right"
-				@click="open = false"
+				@click="save"
 			>
 				Submit
 			</button>
-		</template> -->
+		</template>
 
 		<template v-slot:body>
 			<form>
 				<div class="w-full">
-					<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex">
-						<div class="W-1/2">
+					<form
+						class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex justify-between w-full"
+					>
+						<div class="w-2/5">
 							<div class="mb-4">
 								<label
 									class="block text-gray-700 text-sm font-bold mb-2"
-									for="username"
+									for="title"
 								>
 									title
 								</label>
@@ -40,12 +42,13 @@
 									id="title"
 									type="text"
 									placeholder="Title"
+									v-model="title"
 								/>
 							</div>
-							<div class="mb-6">
+							<div class="mb-4">
 								<label
 									class="block text-gray-700 text-sm font-bold mb-2"
-									for="password"
+									for="price"
 								>
 									Price
 								</label>
@@ -54,12 +57,13 @@
 									id="price"
 									type="price"
 									placeholder="50.00"
+									v-model.number="price"
 								/>
 							</div>
-							<div class="mb-6">
+							<div class="mb-4">
 								<label
 									class="block text-gray-700 text-sm font-bold mb-2"
-									for="password"
+									for="priority"
 								>
 									Priority
 								</label>
@@ -71,46 +75,54 @@
 								/>
 							</div>
 						</div>
-						<div class="w-1/2">
-							<div class="mb-6">
+						<div class="w-2/5">
+							<div class="mb-4">
 								<label
 									class="block text-gray-700 text-sm font-bold mb-2"
-									for="password"
+									for="tag"
 								>
 									Tag
 								</label>
 								<select
-									name=""
-									id=""
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+									name="tag"
+									id="tag"
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									v-model="tag"
 								>
 									<option value="" disabled selected> Choose a tag </option>
-									<option value="opt.id" v-for="opt in tags" :key="opt.id">
+									<option :value="opt.id" v-for="opt in tags" :key="opt.id">
 										{{ opt.name }}</option
 									>
 								</select>
 							</div>
 
-							<div class="mb-6">
+							<div class="mb-4">
 								<label
 									class="block text-gray-700 text-sm font-bold mb-2"
-									for="password"
+									for="status"
 								>
 									Status
 								</label>
 								<select
-									name=""
-									id=""
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+									name="status"
+									id="status"
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									v-model="status_id"
 								>
-									<option value="" disabled selected> Choose a tag </option>
-									<option value="opt.id" v-for="opt in tags" :key="opt.id">
-										{{ opt.name }}</option
+									<option value="" disabled selected>
+										Choose Task Status
+									</option>
+									<option
+										:value="opt.value"
+										v-for="opt in status"
+										:key="opt.id"
+									>
+										{{ opt.label }}</option
 									>
 								</select>
 							</div>
 
-							<div class="mb-6">
+							<div class="mb-4">
 								<label
 									class="block text-gray-700 text-sm font-bold mb-2"
 									for="assignee"
@@ -120,11 +132,12 @@
 								<select
 									name="assignee"
 									id=""
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									v-model="assignee"
 								>
-									<option value="" disabled selected> Choose a tag </option>
+									<option value="" disabled selected> Assign Task To </option>
 									<option
-										value="opt.id"
+										:value="opt.id"
 										v-for="opt in $store.state.assignees"
 										:key="opt.id"
 									>
@@ -154,6 +167,7 @@
 <script>
 import drugStkCheckboxVue from "./drug-stk-checkbox.vue";
 import drugStkModalVue from "./drug-stk-modal.vue";
+import request from "../utils/request";
 
 export default {
 	components: {
@@ -190,11 +204,34 @@ export default {
 					value: "closed",
 				},
 			],
+			title: "",
+			price: "",
+			tag: "",
+			assignee: "",
+			status_id: "",
 		};
 	},
 	methods: {
 		setPriority(value) {
 			this.priority = value;
+		},
+		async save() {
+			try {
+				const data = {
+					title: this.title,
+					price: this.price,
+					tag: this.tag,
+					assignee: this.assignee,
+					current_task: true,
+					status: this.status_id,
+				};
+				await request.post("/api/tasks", data);
+				await this.$store.dispatch('getTasks')
+				await this.$store.dispatch("getAnalytics"),
+				this.open = false
+			} catch (error) {
+				console.log(error)
+			}
 		},
 	},
 	computed: {

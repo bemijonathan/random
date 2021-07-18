@@ -43,13 +43,49 @@
 		<div>
 			<img src="https://img.icons8.com/windows/32/000000/chat-message.png" />
 		</div>
-		<div class="flex">
-			<div
-				v-for="i in 3"
-				:key="i + 'sdfsdfd'"
-				class="h-1 w-1 bg-gray-500 rounded-full"
-				style="margin:0.8px"
-			></div>
+		<div class="">
+			<div class="relative">
+				<button
+					@click="dropdownOpen = !dropdownOpen"
+					class="relative z-10 block rounded-md bg-white p-2 focus:outline-none"
+				>
+					<svg
+						class="h-5 w-5 text-gray-800"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</button>
+				<div
+					v-if="dropdownOpen"
+					class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+				>
+					<div
+						@click="dropdownOpen = false"
+						class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white"
+					>
+						Update
+					</div>
+					<div
+						@click="dropdownOpen = false"
+						class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white"
+					>
+						Delete
+					</div>
+					<div
+						@click="dropdownOpen = false"
+						class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white"
+					>
+						Comment
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -57,6 +93,11 @@
 <script>
 export default {
 	props: ["item"],
+	data() {
+		return {
+			dropdownOpen: false,
+		};
+	},
 };
 </script>
 
