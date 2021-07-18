@@ -25,97 +25,113 @@
 
 		<template v-slot:body>
 			<form>
-				<div class="w-full max-w-xs">
-					<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-						<div class="mb-4">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2"
-								for="username"
-							>
-								title
-							</label>
-							<input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								id="title"
-								type="text"
-								placeholder="Title"
-							/>
-						</div>
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2"
-								for="password"
-							>
-								Price
-							</label>
-							<input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-								id="price"
-								type="price"
-								placeholder="50.00"
-							/>
-						</div>
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2"
-								for="password"
-							>
-								Priority
-							</label>
-
-							<drug-stk-checkbox-vue
-								:label="'High'"
-								:itemValue="false"
-								@selectItem="setPriority"
-							/>
-						</div>
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2"
-								for="password"
-							>
-								Tag
-							</label>
-							<select
-								name=""
-								id=""
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-							>
-								<option value="" disabled selected> Choose a tag </option>
-								<option value="opt.id" v-for="opt in tags" :key="opt.id">
-									{{ opt.name }}</option
+				<div class="w-full">
+					<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex">
+						<div class="W-1/2">
+							<div class="mb-4">
+								<label
+									class="block text-gray-700 text-sm font-bold mb-2"
+									for="username"
 								>
-							</select>
-						</div>
-
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2"
-								for="password"
-							>
-								Status
-							</label>
-							<select name="" id="">
-								<option value="" disabled selected> Choose a tag </option>
-								<option value="opt.id" v-for="opt in tags" :key="opt.id">
-									{{ opt.name }}</option
+									title
+								</label>
+								<input
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									id="title"
+									type="text"
+									placeholder="Title"
+								/>
+							</div>
+							<div class="mb-6">
+								<label
+									class="block text-gray-700 text-sm font-bold mb-2"
+									for="password"
 								>
-							</select>
-						</div>
-
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2"
-								for="password"
-							>
-								Assign Task To
-							</label>
-							<select name="" id="">
-								<option value="" disabled selected> Choose a tag </option>
-								<option value="opt.id" v-for="opt in tags" :key="opt.id">
-									{{ opt.name }}</option
+									Price
+								</label>
+								<input
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+									id="price"
+									type="price"
+									placeholder="50.00"
+								/>
+							</div>
+							<div class="mb-6">
+								<label
+									class="block text-gray-700 text-sm font-bold mb-2"
+									for="password"
 								>
-							</select>
+									Priority
+								</label>
+
+								<drug-stk-checkbox-vue
+									:label="'High'"
+									:itemValue="false"
+									@selectItem="setPriority"
+								/>
+							</div>
+						</div>
+						<div class="w-1/2">
+							<div class="mb-6">
+								<label
+									class="block text-gray-700 text-sm font-bold mb-2"
+									for="password"
+								>
+									Tag
+								</label>
+								<select
+									name=""
+									id=""
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+								>
+									<option value="" disabled selected> Choose a tag </option>
+									<option value="opt.id" v-for="opt in tags" :key="opt.id">
+										{{ opt.name }}</option
+									>
+								</select>
+							</div>
+
+							<div class="mb-6">
+								<label
+									class="block text-gray-700 text-sm font-bold mb-2"
+									for="password"
+								>
+									Status
+								</label>
+								<select
+									name=""
+									id=""
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+								>
+									<option value="" disabled selected> Choose a tag </option>
+									<option value="opt.id" v-for="opt in tags" :key="opt.id">
+										{{ opt.name }}</option
+									>
+								</select>
+							</div>
+
+							<div class="mb-6">
+								<label
+									class="block text-gray-700 text-sm font-bold mb-2"
+									for="assignee"
+								>
+									Assign Task To
+								</label>
+								<select
+									name="assignee"
+									id=""
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+								>
+									<option value="" disabled selected> Choose a tag </option>
+									<option
+										value="opt.id"
+										v-for="opt in $store.state.assignees"
+										:key="opt.id"
+									>
+										{{ opt.name }}</option
+									>
+								</select>
+							</div>
 						</div>
 					</form>
 				</div>

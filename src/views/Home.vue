@@ -37,6 +37,7 @@ export default {
 				await this.$store.dispatch("getTasks"),
 				await this.$store.dispatch("getAnalytics"),
 				await this.$store.dispatch("getTags"),
+				await this.$store.dispatch("getAssignees")
 			]);
 		} catch (error) {
 			await this.$store.error;

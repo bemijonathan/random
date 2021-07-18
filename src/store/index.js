@@ -110,7 +110,7 @@ export default createStore({
       try {
         const { data } = await request.get('/api/assignees');
         console.log(data)
-        commit('setAssignees', data)
+        commit('setAssignees', data.data)
       } catch (error) {
         throw new Error(error.response ? error.response.message : error.message)
       }
