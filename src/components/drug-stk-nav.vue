@@ -138,71 +138,74 @@
 			</form>
 		</template>
 	</drug-stk-modal-vue>
-	<div class="logo flex items-center w-full justify-between">
+	<div class="logo flex items-center w-full justify-between px-4 py-5">
 		<h1 class="text-2xl bold">LOGO</h1>
 		<div class="">
 			<button
-				class="bg-blue-500 text-sm text-white py-2 px-4 rounded-full"
+				class="bg-blue-500 flex justify-between space-x-2 items-center  py-1 px-6 rounded-bl-full rounded-tr-full focus:outline-none rounded-br-full rounded-tl-none font-bold"
 				@click="open = true"
 			>
-				Add New Task
+				<span class="text-sm text-white">Add New Task</span>
+				<span>
+					<i class="ri-add-line text-white text-lg"></i>
+				</span>
 			</button>
 		</div>
 	</div>
 </template>
 
 <script>
-import drugStkCheckboxVue from "./drug-stk-checkbox.vue";
-import drugStkModalVue from "./drug-stk-modal.vue";
+	import drugStkCheckboxVue from "./drug-stk-checkbox.vue";
+	import drugStkModalVue from "./drug-stk-modal.vue";
 
-export default {
-	components: {
-		drugStkModalVue,
-		drugStkCheckboxVue,
-	},
-	data() {
-		return {
-			open: false,
-			priority: false,
-			status: [
-				{
-					label: "Waiting Approval",
-					value: "waiting_approval",
-				},
-				{
-					label: "In Progress",
-					value: "in_progress",
-				},
-				{
-					label: "In Review",
-					value: "in_review",
-				},
-				{
-					label: "Verify",
-					value: "verify",
-				},
-				{
-					label: "Archived",
-					value: "archived",
-				},
-				{
-					label: "Closed",
-					value: "closed",
-				},
-			],
-		};
-	},
-	methods: {
-		setPriority(value) {
-			this.priority = value;
+	export default {
+		components: {
+			drugStkModalVue,
+			drugStkCheckboxVue,
 		},
-	},
-	computed: {
-		tags() {
-			return this.$store.state.Tags;
+		data() {
+			return {
+				open: false,
+				priority: false,
+				status: [
+					{
+						label: "Waiting Approval",
+						value: "waiting_approval",
+					},
+					{
+						label: "In Progress",
+						value: "in_progress",
+					},
+					{
+						label: "In Review",
+						value: "in_review",
+					},
+					{
+						label: "Verify",
+						value: "verify",
+					},
+					{
+						label: "Archived",
+						value: "archived",
+					},
+					{
+						label: "Closed",
+						value: "closed",
+					},
+				],
+			};
 		},
-	},
-};
+		methods: {
+			setPriority(value) {
+				this.priority = value;
+			},
+		},
+		computed: {
+			tags() {
+				return this.$store.state.Tags;
+			},
+		},
+	};
 </script>
 
-<style></style>
+<style scoped></style>
