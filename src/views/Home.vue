@@ -68,7 +68,7 @@ body {
 
 [holder]:nth-of-type(2) {
 	width: 75%;
-	height: calc(100vh - 112px);
+	height: calc(100vh - 190px);
 	overflow-y: scroll;
 }
 </style>

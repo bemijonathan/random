@@ -63,6 +63,6 @@ export default {
 
 <style scoped>
 [container] {
-	height: calc(100vh - 112px);
+	height: calc(100vh - 190px);
 }
 </style>

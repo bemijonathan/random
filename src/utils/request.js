@@ -1,6 +1,6 @@
 import axios from "axios";
 
-console.log(process.env)
+console.log(process.env);
 
 // if (process.env.NODE_ENV != 'development') {
     axios.defaults.baseURL = 'https://drug-stock-test.herokuapp.com/'
@@ -8,4 +8,4 @@ console.log(process.env)
     // axios.defaults.baseURL = 'http://localhost:8810'
 // }
 
-export default axios
+export default axios;
