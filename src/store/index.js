@@ -39,7 +39,7 @@ export default createStore({
   actions: {
     async getTasks({ commit }) {
       try {
-        const { data } = await request.get('/api/tasks?page=1');
+        const { data } = await request.get('/api/tasks?populate=assignee&page=1');
         console.log(data)
         commit('setTasks', data)
       } catch (error) {
@@ -74,11 +74,11 @@ export default createStore({
         tags.tag.split(" ").forEach(element => {
           params += `where[status]=${element}&`
         });
-        data = await (await request.get('/api/tasks?page=1&status=' + params)).data
-        commit("setCurrentQuery", "/api/tasks?page=1&status=' + params")
+        data = await (await request.get('/api/tasks??populate=assignee&page=1&status=' + params)).data
+        commit("setCurrentQuery", "/api/tasks?populate=assignee&page=1&status=' + params")
       } else {
-        data = await (await request.get('/api/tasks?page=1&where[status]=' + tags.tag)).data
-        commit("setCurrentQuery", '/api/tasks?page=1&where[status]=' + tags.tag)
+        data = await (await request.get('/api/tasks?populate=assignee&page=1&where[status]=' + tags.tag)).data
+        commit("setCurrentQuery", '/api/tasks?populate=assignee&page=1&where[status]=' + tags.tag)
       }
       console.log(data)
       commit("setTasks", data)
@@ -96,11 +96,11 @@ export default createStore({
         tag.split(" ").forEach(element => {
           params += `where[status]=${element}&`
         });
-        data = await (await request.get(`/api/tasks?page=${page}&status=${params}`)).data
-        commit("setCurrentQuery", `/api/tasks?page=${page}&status=${params}`)
+        data = await (await request.get(`/api/tasks?populate=assignee&page=${page}&status=${params}`)).data
+        commit("setCurrentQuery", `/api/tasks?populate=assignee&page=${page}&status=${params}`)
       } else {
-        data = await (await request.get(`/api/tasks?page=${page}&where[status]=${tag}`)).data
-        commit("setCurrentQuery", '/api/tasks?page=1&where[status]=' + tag)
+        data = await (await request.get(`/api/tasks?populate=assignee&page=${page}&where[status]=${tag}`)).data
+        commit("setCurrentQuery", '/api/tasks?populate=assignee&page=1&where[status]=' + tag)
       }
       console.log(data)
       commit("setTasks", data)

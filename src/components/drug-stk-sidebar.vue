@@ -101,7 +101,7 @@ export default {
 
 <style>
 [sidebar] {
-	height: calc(100vh - 112px);
+	height: calc(100vh - 190px);
 	/* min-width: 30%; */
 	/* overflow: scroll; */
 }
